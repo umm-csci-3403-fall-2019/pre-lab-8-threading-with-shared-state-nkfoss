@@ -8,26 +8,45 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) throws InterruptedException {
+
         // Update this to make things go faster or take longer for timing studies.
-        final int ARRAY_SIZE = 100000000;
+        final int ARRAY_SIZE = 10000000;
         Random random = new Random();
+
+        // Populate the arrayList with random numbers
         ArrayList<Integer> numbers = new ArrayList<Integer>();
         for (int i = 0; i < ARRAY_SIZE; ++i) {
             numbers.add(random.nextInt(ARRAY_SIZE));
         }
 
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+        ///    Trial 1   /////
+        //////////////////////
+
         Instant startTime = Instant.now();
+
+        // search numbers, where the target value is the first value in the arraylist
         System.out.println(searchArray(numbers.get(1), numbers));
+
+        //etc.
         System.out.println(searchArray(numbers.get(5), numbers));
         System.out.println(searchArray(numbers.get(900), numbers));
         System.out.println(searchArray(numbers.get(3200), numbers));
         System.out.println(searchArray(numbers.get(7400), numbers));
         System.out.println(searchArray(numbers.get(9876), numbers));
+
         Instant endTime = Instant.now();
         Duration totalTime = Duration.between(startTime, endTime);
         System.out.println("Total time was " + (totalTime.getNano() / 1000000) + " milliseconds");
 
+        /////////////////////////////////////////////////////////////////////////////////////////////
+        //// Trial 2   //////
+        /////////////////////
+
         startTime = Instant.now();
+
+        // Now we are using values that may not be in the array.
         System.out.println(searchArray(2000000, numbers));
         System.out.println(searchArray(-45, numbers));
         endTime = Instant.now();
